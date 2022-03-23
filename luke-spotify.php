@@ -66,16 +66,12 @@ add_shortcode('spotify', 'spotify_shortcode');
 function spotify_shortcode( $atts = [], $content = null) {
     //
     $content = "";
-    $client_id = '3af9477432e84ddb87c2633a28ef7bfc';
-    $client_secret = '9149bc74b4c34a60be4ca86502a5c33c';
     $options = get_option('luke_sample');
 
     $client_id ='';
     $client_secret = '';
     if ($options) {
         $client_id = $options['sometext'] ? $options['sometext'] : '';
-        #$client_id = $options['sometext'];
-        #$client_secret = $options['othertext'];
         $client_secret = $options['othertext'] ? $options['othertext'] : '';
     }
     $ch = curl_init();
@@ -89,7 +85,6 @@ function spotify_shortcode( $atts = [], $content = null) {
     $erg = json_decode($result);
 
     if (strpos($result, 'error') == false) {
-    #if (! $erg->error) {
         $token = $erg->access_token;
     } else {
         $token = '';
